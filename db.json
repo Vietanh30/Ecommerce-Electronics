@@ -1,0 +1,145 @@
+{
+    "users": [
+        {
+            "id": "1",
+            "username": "admin",
+            "email": "admin@gmail.com",
+            "password": "123456",
+            "phone": "0123456789",
+            "role": "admin"
+        },
+        {
+            "id": "def0",
+            "email": "user@gmail.com",
+            "password": "123456",
+            "username": "User",
+            "phone": "012345655",
+            "role": "user"
+        },
+        {
+            "id": "daa1",
+            "email": "user2@gmail.com",
+            "password": "123456",
+            "username": "User2",
+            "phone": "0123124124",
+            "role": "user"
+        }
+    ],
+    "carts": [
+        {
+            "id": "58cb",
+            "userId": "def0",
+            "items": []
+        },
+        {
+            "id": "de12",
+            "userId": "daa1",
+            "items": []
+        }
+    ],
+    "categories": [
+        {
+            "id": "1",
+            "name": "Laptop",
+            "slug": "laptop",
+            "image": "src/assets/Categories/laptop-category.png",
+            "status": true
+        },
+        {
+            "id": "2",
+            "name": "iPhone",
+            "slug": "iphone",
+            "image": "src/assets/Categories/iphone-category.png",
+            "status": true
+        },
+        {
+            "id": "3",
+            "name": "Apple Watch",
+            "slug": "apple-watch",
+            "image": "src/assets/Categories/apple-watch-category.png",
+            "status": true
+        },
+        {
+            "id": "4",
+            "name": "Camera",
+            "slug": "camera",
+            "image": "src/assets/Categories/camera-category.png",
+            "status": true
+        },
+        {
+            "id": "5",
+            "name": "Máy tính bảng",
+            "slug": "may-tinh-bang",
+            "image": "src/assets/Categories/tablet-category.png",
+            "status": true
+        },
+        {
+            "id": "6",
+            "name": "Màn hình PC",
+            "slug": "man-hinh-pc",
+            "image": "src/assets/Categories/monitor-category.png",
+            "status": true
+        }
+    ],
+    "products": [
+        {
+            "id": "b39a",
+            "categoryId": "3",
+            "name": "Vòng tay thông minh Samsung Galaxy Fit3",
+            "model": "SAMSUNG",
+            "costPrice": "800000",
+            "salePrice": "990000",
+            "discountPrice": "900000",
+            "description": "Galaxy Fit3 thu hút mọi ánh nhìn với thiết kế hiện đại và tinh tế.",
+            "specification": {
+                "screen": " AMOLED",
+                "chip": "DRAGON",
+                "storage": "256 MB",
+                "battery": "208 mAh",
+                "connectivity": "Bluetooth v5.3"
+            },
+            "images": [
+                {
+                    "url": "/src/assets/Products/apple-watch/applewatch1.jpg",
+                    "alt": "Hình 1"
+                },
+                {
+                    "url": "/src/assets/Products/apple-watch/applewatch2.jpg",
+                    "alt": "Hình 2"
+                },
+                {
+                    "url": "/src/assets/Products/apple-watch/applewatch3.jpg",
+                    "alt": "Hình 3"
+                }
+            ],
+            "type": "Đồng hồ",
+            "features": [
+                "Bảo hành chính hãng 12 tháng",
+                "Giao hàng miễn phí"
+            ],
+            "promotions": [
+                "Giảm thêm 5% khi thanh toán online",
+                "Tặng phiếu mua hàng 500.000đ"
+            ],
+            "stock": "20",
+            "rating": 4.5
+        }
+    ],
+    "flashSales": [
+        {
+            "id": "1",
+            "productId": "b39a"
+        }
+    ],
+    "orders": [],
+    "chatbox": [
+        {
+            "id": "1",
+            "userId": 1,
+            "adminId": 2,
+            "message": "Hello",
+            "sender": "user",
+            "createdAt": "2024-03-18T10:30:00"
+        }
+    ]
+}
