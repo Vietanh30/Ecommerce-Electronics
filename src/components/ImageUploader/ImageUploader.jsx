@@ -78,6 +78,7 @@ function ImageUploader({ onImagesChange, categoryId }) {
             { url: '/src/assets/Products/monitors/monitor8.jpg', alt: 'Hình 8' },
             { url: '/src/assets/Products/monitors/monitor9.jpg', alt: 'Hình 9' },
             { url: '/src/assets/Products/monitors/monitor10.jpg', alt: 'Hình 10' },
+            { url: '/src/assets/Products/monitors/monitor11.jpg', alt: 'Hình 11' },
         ],
         // Thêm các thể loại khác tại đây
     };

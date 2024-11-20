@@ -66,7 +66,7 @@ const Header = () => {
                 <div className="flex flex-wrap items-center justify-between py-3 text-white">
                     <div className="flex items-center">
                         <Link to="/" className="text-lg md:text-xl font-bold text-[#fef201] whitespace-nowrap">
-                            ECOMMERCE NHÓM 6
+                            ECOMMERCE NHÓM 10
                         </Link>
                     </div>
 

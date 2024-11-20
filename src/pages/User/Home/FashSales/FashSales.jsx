@@ -53,8 +53,8 @@ function FlashSales() {
         <div className="container mx-auto px-4 lg:px-20">
             <div className="text-2xl font-semibold mt-5">Khuyến mãi Online</div>
             <div className="mt-5 pb-5">
-                <div className="bg-white rounded-t-xl flex border-b-2">
-                    <div className="bg-[#f1f8fe] border-b-2 border-[#2A83E9]">
+                <div className="bg-white rounded-t-xl flex border-b-2 justify-center">
+                    <div className="bg-[#f1f8fe] border-b-2 border-[#2A83E9] flex justify-center w-full">
                         <img className='w-36 px-6 py-3 h-auto' src={imgFlashSales} alt="" />
                     </div>
                 </div>

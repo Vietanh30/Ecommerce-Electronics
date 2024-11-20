@@ -27,7 +27,7 @@ function Sidebar() {
                     <div className="flex items-center justify-between">
                         <div className="flex items-center justify-start rtl:justify-end">
                             <Link to={path.dashboard} className="flex flex-col items-center cursor-pointer">
-                                <div className="text-white text-4xl font-bold">Nhóm 6</div>
+                                <div className="text-white text-4xl font-bold">Nhóm 10</div>
                                 <div className="flex gap-5 items-center">
                                     <div className="w-11 border-b border-white"></div>
                                     <div className="w-11 border-b border-white"></div>

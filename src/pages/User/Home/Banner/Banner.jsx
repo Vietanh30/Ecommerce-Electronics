@@ -29,7 +29,8 @@ const Banner = () => {
         { id: 1, image: "/src/assets/Home/banner1.png", alt: "Banner 1", link: "#" },
         { id: 2, image: "/src/assets/Home/banner2.png", alt: "Banner 2", link: "#" },
         { id: 3, image: "/src/assets/Home/banner3.png", alt: "Banner 3", link: "#" },
-        { id: 4, image: "/src/assets/Home/banner4.png", alt: "Banner 4", link: "#" }
+        { id: 4, image: "/src/assets/Home/banner4.png", alt: "Banner 4", link: "#" },
+        // { id: 5, image: "/src/assets/Home/banner5.png", alt: "Banner 5", link: "#" }
     ];
 
     const settings = {
