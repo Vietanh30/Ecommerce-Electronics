@@ -26,7 +26,6 @@ const EditUser = ({ isOpen, onClose, userData, fetchData }) => {
 
         try {
             const response = await adminAPI.user.updateUser(userData.id, updatedUser);
-            console.log(response)
             Swal.fire('Thành công!', 'Người dùng đã được cập nhật thành công.', 'success');
             fetchData();
             onClose();

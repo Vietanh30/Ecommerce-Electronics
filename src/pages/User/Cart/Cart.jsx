@@ -98,7 +98,7 @@ function Cart() {
         <div className="container mx-auto px-4 lg:px-20 mt-4">
           <div className="text-center text-xl font-semibold">Giỏ hàng</div>
           <div className="flex justify-center">
-            <div className="mt-3 bg-white rounded-xl p-6">
+            <div className="mt-3 bg-white rounded-xl p-6 mx-28">
               {cart && cart.items?.length > 0 ? (
                 cart.items.map((item) => {
                   const product = products.find((p) => p.id === item.productId);
@@ -106,18 +106,18 @@ function Cart() {
 
                   return (
                     <div key={item.productId}>
-                      <div className="grid grid-cols-5 gap-4 items-start">
+                      <div className="grid grid-cols-8 gap-4 items-start">
                         <div>
-                          <img className="col-span-1 w-full h-20" src={product?.images[0]?.url} alt={product?.name} />
+                          <img className="col-span-1 w-full h-auto" src={product?.images[0]?.url} alt={product?.name} />
                         </div>
-                        <div className="col-span-3">
+                        <div className="col-span-6">
                           <div className="font-semibold line-clamp-1">{product?.name}</div>
-                          <div className="font-semibold text-xs mt-1 line-clamp-2">
+                          <div className="font-semibold text-xs mt-1 line-clamp-2 w-[80%]">
                             Mô tả: <span className="text-[#344054] font-light">{product?.description}</span>
                           </div>
                         </div>
                         <div className="col-span-1">
-                          <div className="text-[#dd2f2c] text-xl font-semibold">{product?.discountPrice.toLocaleString()} ₫</div>
+                          <div className="text-[#dd2f2c] text-xl font-semibold w-max">{product?.discountPrice.toLocaleString()} ₫</div>
                           <div className="text-[#a4a4a4] line-through">{product?.salePrice.toLocaleString()} ₫</div>
                         </div>
                       </div>

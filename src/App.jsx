@@ -18,6 +18,7 @@ import ManageProducts from "./pages/Admin/ManageProducts/ManageProducts";
 import Products from "./pages/User/Products/Products";
 import Checkout from "./pages/User/Checkout/Checkout";
 import HistoryOrder from "./pages/User/HistoryOrder/HistoryOrder";
+import ManageOrders from "./pages/Admin/ManageOrders/ManageOrders";
 
 const LayoutWithHeader = () => {
   return (
@@ -69,6 +70,7 @@ function App() {
           <Route path={path.loginAdmin} element={<LoginAdmin setUserRole={setUserRole} />} />
           <Route path={path.manageUser} element={<PrivateRoute element={ManageUsers} roles={["admin"]} userRole={userRole} />} />
           <Route path={path.manageProduct} element={<PrivateRoute element={ManageProducts} roles={["admin"]} userRole={userRole} />} />
+          <Route path={path.manageOrders} element={<PrivateRoute element={ManageOrders} roles={["admin"]} userRole={userRole} />} />
 
         </Routes>
       </Router>

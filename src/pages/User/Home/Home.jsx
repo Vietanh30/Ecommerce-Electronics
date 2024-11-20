@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { userAPI } from "../../../api/userApi";
 import FlashSales from "./FashSales/FashSales";
 import BoxChatWithToggle from "../../../components/BoxChatWithToggle/BoxChatWithToggle";
+import { Link } from "react-router-dom";
 
 function Home() {
     const [categories, setCategories] = useState([]);
@@ -16,7 +17,6 @@ function Home() {
         const fetchCategories = async () => {
             try {
                 const response = await userAPI.category.getAll();
-                console.log(response);
                 
                 // Lưu tất cả các danh mục mà không lọc theo status
                 setCategories(response.data);
@@ -44,10 +44,12 @@ function Home() {
                     <div className="bg-white rounded-xl mt-5">
                         <div className="grid grid-cols-6 gap-4">
                             {categories.map((category) => (
-                                <div key={category.id} className="col-span-1 py-4 hover:bg-gray-300 transition duration-150 ease-in-out cursor-pointer">
-                                    <img src={category.image} alt={category.name} className="w-20 h-auto mx-auto p-2 object-cover rounded" />
-                                    <div className="mt-2 text-center">{category.name}</div>
-                                </div>
+                                <Link key={category.id} to={`/category/${category.id}`}>
+                                    <div  className="col-span-1 py-4 hover:bg-gray-300 transition duration-150 ease-in-out cursor-pointer">
+                                        <img src={category.image} alt={category.name} className="w-20 h-auto mx-auto p-2 object-cover rounded" />
+                                        <div className="mt-2 text-center">{category.name}</div>
+                                    </div>
+                                </Link>
                             ))}
                         </div>
                     </div>

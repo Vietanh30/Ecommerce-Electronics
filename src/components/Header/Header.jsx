@@ -27,7 +27,7 @@ const Header = () => {
         const fetchCart = async () => {
             try {
                 const response = await userAPI.cart.get(user.id);
-                const cart = response.data[0].items || [];
+                const cart = response.data[0]?.items || [];
                 const totalQuantity = cart.reduce((total, item) => total + 1, 0);
                 dispatch({ type: 'SET_CART_ITEM_COUNT', payload: totalQuantity });
             } catch (error) {

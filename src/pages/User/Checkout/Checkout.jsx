@@ -57,7 +57,7 @@ function Checkout() {
             Swal.fire("Lỗi!", "Vui lòng điền đầy đủ thông tin đặt hàng.", "error");
             return;
         }
-
+    
         // Kiểm tra tồn kho cho từng sản phẩm trong giỏ hàng
         for (const item of cart.items) {
             const product = products.find((p) => p.id === item.productId);
@@ -66,17 +66,18 @@ function Checkout() {
                 return;
             }
         }
-
+    
         const orderData = {
             userId,
             items: cart.items,
             totalPrice: calculateTotal(),
+            orderTime: new Date().toISOString(), // Thêm thời gian đặt hàng
             ...orderInfo,
         };
-
+    
         try {
             await userAPI.order.create(orderData); // Tạo đơn hàng
-
+    
             // Cập nhật tồn kho sau khi đặt hàng
             await Promise.all(cart.items.map(async (item) => {
                 const product = products.find((p) => p.id === item.productId);
@@ -85,7 +86,7 @@ function Checkout() {
                     await userAPI.product.updateStock(product.id, newStock);
                 }
             }));
-
+    
             // Làm sạch giỏ hàng sau khi đặt hàng thành công
             await userAPI.cart.resetCart(userId);
             dispatch({ type: 'SET_CART_ITEM_COUNT', payload: 0 }); // Cập nhật số lượng sau khi xóa
@@ -103,7 +104,7 @@ function Checkout() {
             <div className="container mx-auto px-4 lg:px-20 pt-4">
                 <div className="text-center text-xl font-semibold">Thanh Toán</div>
                 <div className="flex justify-center">
-                    <div className="mt-3 bg-white rounded-xl p-6">
+                    <div className="mt-3 bg-white rounded-xl p-6 mx-32">
                         {cart && cart.items?.length > 0 ? (
                             cart.items.map((item) => {
                                 const product = products.find((p) => p.id === item.productId);
@@ -111,18 +112,18 @@ function Checkout() {
 
                                 return (
                                     <div key={item.productId}>
-                                        <div className="grid grid-cols-5 gap-4 items-start">
+                                        <div className="grid grid-cols-8 gap-4 items-start">
                                             <img className="col-span-1 w-full h-20" src={product?.images[0]?.url} alt={product?.name} />
-                                            <div className="col-span-3">
+                                            <div className="col-span-6">
                                                 <div className="font-semibold text-base line-clamp-1">{product?.name}</div>
-                                                <div className="font-semibold text-xs mt-1 line-clamp-2">
+                                                <div className="font-semibold text-xs mt-1 line-clamp-2 w-[80%]">
                                                     Mô tả: <span className="text-[#344054] font-light">{product?.description}</span>
                                                 </div>
                                                 <div className="font-semibold text-xs mt-1 line-clamp-2">
                                                     Số lượng: <span className="text-[#344054] font-light">{item?.quantity}</span>
                                                 </div>
                                             </div>
-                                            <div className="col-span-1 text-[#dd2f2c] text-xl font-semibold">{product?.discountPrice.toLocaleString()} ₫</div>
+                                            <div className="col-span-1 text-[#dd2f2c] w-max text-xl font-semibold">{product?.discountPrice.toLocaleString()} ₫</div>
                                         </div>
                                         <div className="mt-4">
                                             <div className="font-semibold flex justify-between">

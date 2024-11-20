@@ -26,7 +26,6 @@ function Register() {
   const checkUniqueEmailAndPhone = async (email, phone) => {
     try {
       const emailExists = await userAPI.checkEmailExists(email); // Check if email exists
-      console.log(emailExists)
       if (emailExists.exists) {
         Swal.fire({
           icon: "warning",

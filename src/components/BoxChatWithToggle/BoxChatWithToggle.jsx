@@ -4,9 +4,10 @@ import ChatIcon from "@mui/icons-material/Chat";
 import { motion } from "framer-motion";
 
 const BoxChatWithToggle = () => {
+  // Khai báo các state cần thiết
   const [isChatOpen, setIsChatOpen] = useState(false); // Trạng thái mở/đóng hộp chat
-  const [messages, setMessages] = useState([]);
-  const [inputMessage, setInputMessage] = useState("");
+  const [messages, setMessages] = useState([]); // Danh sách tin nhắn
+  const [inputMessage, setInputMessage] = useState(""); // Nội dung tin nhắn người dùng nhập vào
 
   // Danh sách câu hỏi và câu trả lời tương ứng
   const qaPairs = [
@@ -16,16 +17,16 @@ const BoxChatWithToggle = () => {
     { question: "Tôi có thể trả lại hàng không?", answer: "Bạn có thể trả lại hàng trong vòng 7 ngày kể từ khi nhận hàng." },
   ];
 
-  // Thêm tin nhắn vào danh sách
+  // Hàm xử lý gửi tin nhắn
   const handleSendMessage = (message) => {
-    if (message.trim() === "") return;
-    setMessages([...messages, { type: "user", text: message }]);
+    if (message.trim() === "") return; // Kiểm tra nếu tin nhắn rỗng
+    setMessages([...messages, { type: "user", text: message }]); // Thêm tin nhắn của người dùng vào danh sách
     setInputMessage(""); // Xóa nội dung ô nhập
   };
 
-  // Xử lý chọn câu hỏi mẫu
+  // Hàm xử lý khi chọn câu hỏi mẫu
   const handleQuestionClick = (question) => {
-    const selectedQA = qaPairs.find((qa) => qa.question === question);
+    const selectedQA = qaPairs.find((qa) => qa.question === question); // Tìm câu hỏi trong danh sách
 
     // Thêm câu hỏi của người dùng
     setMessages((prev) => [...prev, { type: "user", text: question }]);
@@ -42,7 +43,7 @@ const BoxChatWithToggle = () => {
     <Box>
       {/* Nút bật/tắt hộp chat */}
       <IconButton
-        onClick={() => setIsChatOpen(!isChatOpen)}
+        onClick={() => setIsChatOpen(!isChatOpen)} // Đổi trạng thái mở/đóng hộp chat
         sx={{
           position: "fixed",
           bottom: 20,
@@ -130,8 +131,7 @@ const BoxChatWithToggle = () => {
           </Box>
 
           {/* Câu hỏi mẫu */}
-                    {/* Câu hỏi mẫu */}
-                    <Box
+          <Box
             sx={{
               padding: 1,
               display: "flex",
@@ -159,7 +159,6 @@ const BoxChatWithToggle = () => {
             ))}
           </Box>
 
-
           {/* Input tin nhắn */}
           <Box
             sx={{
@@ -175,12 +174,12 @@ const BoxChatWithToggle = () => {
               variant="outlined"
               placeholder="Nhập tin nhắn..."
               value={inputMessage}
-              onChange={(e) => setInputMessage(e.target.value)}
+              onChange={(e) => setInputMessage(e.target.value)} // Cập nhật nội dung ô nhập
               inputProps={{ style: { fontSize: "12px" } }}
             />
             <Button
               variant="contained"
-              onClick={() => handleSendMessage(inputMessage)}
+              onClick={() => handleSendMessage(inputMessage)} // Gửi tin nhắn khi nhấn nút
               sx={{ fontSize: "12px", padding: "6px 12px" }}
             >
               Gửi

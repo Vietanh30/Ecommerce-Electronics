@@ -125,10 +125,8 @@ const AddProduct = ({ isOpen, onClose, fetchData, categories }) => {
         };
     
         try {
-            console.log("Product Data to be sent:", productData);
             // Gửi yêu cầu đến API
             const response = await adminAPI.product.createProduct(productData);
-            console.log("response",response);
             if (response.status === 201) {
                 Swal.fire('Thành công!', 'Thêm sản phẩm thành công.', 'success');
                 fetchData();

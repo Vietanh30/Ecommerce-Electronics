@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom";
 
 function CardProduct({ product }) {
-    console.log(product);
     return ( 
         <Link to={`/category/${product.categoryId}/product/${product.id}`} className="cursor-pointer">
         
             <div className='p-2 border rounded group h-full'>
                 <div className='text-[10px] bg-[#f1f1f1] text-[#333] rounded w-max px-3 py-[2px]'>Trả góp 0%</div>
-                <img className='w-full mt-4 transition-transform duration-300 group-hover:translate-y-[-5px]' src={product.images[0]?.url} alt={product.images[0]?.alt} />
-                <div className='text-sm line-clamp-2 group-hover:text-[#2a83e9]'>                                
+                <div className="py-2">
+                    <img className='w-full h-44 mt-4 transition-transform duration-300 group-hover:translate-y-[-5px]' src={product.images[0]?.url} alt={product.images[0]?.alt} />
+
+                </div>
+                <div className='text-sm line-clamp-2 font-medium group-hover:text-[#2a83e9] min-h-10'>                                
                     {product.name}
                 </div>
                 <div className='mt-1 text-[10px] text-gray-600 line-clamp-2'>                                

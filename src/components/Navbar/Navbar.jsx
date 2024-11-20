@@ -30,13 +30,11 @@ function Navbar() {
       <div className="container mx-auto px-4 lg:px-20">
         <div className="flex gap-6 justify-center">
           {categories.map((category) => (
-            <>
             <Link key={category.id} to={`/category/${category.id}`}>
-              <div key={category.id} className="text-[#0567da] text-sm cursor-pointer">
+              <div className="text-[#0567da] text-sm cursor-pointer">
                 {category.name}
               </div>
             </Link>
-            </>
           ))}
         </div>
       </div>

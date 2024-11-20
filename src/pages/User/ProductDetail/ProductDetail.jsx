@@ -81,9 +81,7 @@ function ProductDetail() {
         }
     
         try {
-            console.log(userId, productId, quantity);
             const response = await userAPI.cart.addProductToCart(userId, productId, quantity); // Gọi API để thêm sản phẩm vào giỏ hàng
-            console.log("response", response);
             
             Swal.fire({
                 icon: 'success',
@@ -91,7 +89,6 @@ function ProductDetail() {
                 text: 'Sản phẩm đã được thêm vào giỏ hàng!',
             }).then(() => {
                 const newCount = response.data.items.length;
-                console.log(newCount);
                 dispatch({ type: 'SET_CART_ITEM_COUNT', payload: newCount }); // newCount là số lượng mới
             });
         } catch (error) {

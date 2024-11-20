@@ -4,7 +4,6 @@ import { adminAPI } from '../../../../api/adminApi';
 import ImageUploader from '../../../../components/ImageUploader/ImageUploader';
 
 const EditProduct = ({ isOpen, onClose, fetchData, categories, product }) => {
-    console.log("product", product);
     const [editedProductData, setEditedProductData] = useState({
         categoryId: '',
         name: '',
@@ -146,7 +145,6 @@ const EditProduct = ({ isOpen, onClose, fetchData, categories, product }) => {
 
         try {
             const response = await adminAPI.product.updateProduct(product.id, editedProductData);
-            console.log(response);
             if (response) {
                 Swal.fire('Thành công!', 'Cập nhật sản phẩm thành công.', 'success');
                 fetchData();

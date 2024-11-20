@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { userAPI } from '../../../api/userApi';
 import { getProfileFromLS } from '../../../utils/auth';
 import Swal from 'sweetalert2';
+import { formatDateAndTime } from '../../../utils/utils';
 
 function HistoryOrder() {
     const [orders, setOrders] = useState([]);
@@ -14,7 +15,6 @@ function HistoryOrder() {
             try {
                 const response = await userAPI.order.getOrdersByUserId(userId);
                 setOrders(response);
-                console.log(response);
             } catch (error) {
                 console.error("Error fetching orders:", error);
                 Swal.fire("Lỗi!", "Không thể tải lịch sử đơn hàng. Vui lòng thử lại.", "error");
@@ -25,7 +25,6 @@ function HistoryOrder() {
     }, [userId]);
 
     const handleViewDetails = async (order) => {
-        console.log(order);
         setSelectedOrder(order);
         try {
             const products = await Promise.all(
@@ -63,6 +62,7 @@ function HistoryOrder() {
                             <tr className="bg-[#2a83e9] text-white rounded-t-[15px]">
                                 <th className="border border-gray-300 p-2">Mã đơn hàng</th>
                                 <th className="border border-gray-300 p-2">Tổng tiền</th>
+                                <th className="border border-gray-300 p-2">Ngày đặt</th>
                                 <th className="border border-gray-300 p-2">Chi tiết</th>
                             </tr>
                         </thead>
@@ -71,6 +71,7 @@ function HistoryOrder() {
                                 <tr key={order.id} className="hover:bg-gray-100">
                                     <td className="border border-gray-300 p-2">#{order.id}</td>
                                     <td className="border border-gray-300 p-2">{order.totalPrice.toLocaleString()} ₫</td>
+                                    <td className="border border-gray-300 p-2">{formatDateAndTime(order.orderTime)}</td>
                                     <td className="border border-gray-300 p-2">
                                         <button className="text-blue-500 hover:underline" onClick={() => handleViewDetails(order)}>
                                             Xem chi tiết
@@ -98,7 +99,7 @@ function HistoryOrder() {
                             <h4 className="font-semibold">Sản phẩm:</h4>
                             {productDetails.map(product => (
                                 <div key={product.id} className="grid grid-cols-5 gap-4 items-start border rounded-xl p-2 mt-3">
-                                    <img className="col-span-1 w-full h-20 object-cover" src={product.images[0]?.url} alt={product.name} />
+                                    <img className="col-span-1 w-full h-auto object-cover" src={product.images[0]?.url} alt={product.name} />
                                     <div className="col-span-3">
                                         <div className="font-semibold text-base line-clamp-1">{product.name}</div>
                                         <div className="font-semibold text-xs mt-1 line-clamp-2">

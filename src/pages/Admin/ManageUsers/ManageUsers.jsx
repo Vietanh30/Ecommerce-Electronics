@@ -162,6 +162,7 @@ function ManageUsers() {
                                         backgroundColor: '#2a83e9', 
                                         borderStartStartRadius: '15px', 
                                         borderStartEndRadius: '15px', 
+                                        color: "#fff"
                                     } 
                                 },
                                 rows: { 

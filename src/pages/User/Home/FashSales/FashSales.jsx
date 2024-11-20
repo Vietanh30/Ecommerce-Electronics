@@ -12,7 +12,6 @@ function FlashSales() {
         const fetchFlashSales = async () => {
             try {
                 const flashSalesResponse = await userAPI.flashSale.getAll();
-                console.log(flashSalesResponse);
                 setFlashSales(flashSalesResponse.data);
 
                 const productPromises = flashSalesResponse.data.map(flashSale =>

@@ -5,6 +5,8 @@ const BASE_USER_URL = "/users";
 const BASE_CART_URL = "/carts";
 const BASE_PRODUCT_URL = "/products"; // Đường dẫn cho sản phẩm
 const BASE_CATEGORY_URL = "/categories";
+const BASE_ORDER_URL = "/orders";
+
 export const adminAPI = {
   user: {
     // Lấy tất cả người dùng
@@ -113,6 +115,7 @@ export const adminAPI = {
   product: {
     // Lấy tất cả sản phẩm
     getAll: () => http.get(BASE_PRODUCT_URL),
+    getById: (id) => http.get(`${BASE_PRODUCT_URL}/${id}`),
 
     // Tạo sản phẩm mới
     createProduct: async (data) => {
@@ -170,7 +173,6 @@ export const adminAPI = {
 
     // Cập nhật thông tin sản phẩm
     updateProduct: async (id, data) => {
-      console.log("data: ", data);
       const currentProductResponse = await http.get(
         `${BASE_PRODUCT_URL}/${id}`
       );
@@ -229,5 +231,17 @@ export const adminAPI = {
   category: {
     getAll: () => http.get(BASE_CATEGORY_URL), // Lấy tất cả danh mục
     getById: (id) => http.get(`${BASE_CATEGORY_URL}/${id}`),
+  },
+  order: {
+    getAll: (userId) => http.get(`${BASE_ORDER_URL}`),
+    getOrdersByUserId: async (userId) => {
+      try {
+        const response = await http.get(`${BASE_ORDER_URL}?userId=${userId}`);
+        return response.data; // Giả định rằng API trả về một mảng các đơn hàng
+      } catch (error) {
+        console.error("Error fetching orders by user ID:", error);
+        throw new Error("Failed to fetch orders");
+      }
+    },
   },
 };

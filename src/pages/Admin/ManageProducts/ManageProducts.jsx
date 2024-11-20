@@ -7,6 +7,7 @@ import { adminAPI } from "../../../api/adminApi";
 import Swal from 'sweetalert2';
 import AddProduct from "./AddProduct/AddProduct";
 import EditProduct from "./EditProduct/EditProduct";
+import { formatPrice } from "../../../utils/utils";
 
 function ManageProducts() {
     const [searchText, setSearchText] = useState('');
@@ -62,7 +63,7 @@ function ManageProducts() {
         return productList.filter(item =>
             (item.name.toLowerCase().includes(searchText.toLowerCase()) ||
             item.model.toLowerCase().includes(searchText.toLowerCase())) &&
-            (selectedCategory ? item.id === selectedCategory : true)
+            (selectedCategory ? item.categoryId === selectedCategory : true)
         );
     }, [searchText, productList, selectedCategory]);
 
@@ -70,7 +71,6 @@ function ManageProducts() {
     const closeAddModal = () => setIsAddModalOpen(false);
 
     const openEditModal = (product) => {
-        console.log("product",product);
         setSelectedProduct(product);
         setIsEditModalOpen(true);
     };
@@ -104,6 +104,7 @@ function ManageProducts() {
             name: 'STT',
             selector: (row, index) => index + 1,
             sortable: true,
+            width: '7%'
         },
         {
             name: 'Hình Ảnh',
@@ -111,26 +112,43 @@ function ManageProducts() {
                 <img src={row.images[0]?.url} alt={row.name} className="w-20 h-auto" />
             ),
             sortable: false,
+            width: '10%'
         },
         {
             name: 'Tên Sản Phẩm',
             selector: row => row.name,
             sortable: true,
+            width: '15%',
+            // Cập nhật để cho phép xuống dòng
+            cell: row => (
+                <div style={{ whiteSpace: 'normal', wordWrap: 'break-word' }}>
+                    {row.name}
+                </div>
+            ),
         },
         {
-            name: 'Model',
+            name: 'Hãng',
             selector: row => row.model,
             sortable: true,
+            width: '10%'
         },
         {
             name: 'Giá Bán',
-            selector: row => row.salePrice.toLocaleString() + ' VNĐ',
+            selector: row => formatPrice(row.salePrice),
             sortable: true,
+            width: '10%'
+
         },
         {
             name: 'Mô Tả',
             selector: row => row.description,
             sortable: false,
+            width: '30%',
+            cell: row => (
+                <div style={{ whiteSpace: 'normal', wordWrap: 'break-word' }}>
+                    {row.description}
+                </div>
+            ),
         },
         {
             name: 'Hành Động',
@@ -200,6 +218,7 @@ function ManageProducts() {
                                     backgroundColor: '#2a83e9', 
                                     borderStartStartRadius: '15px', 
                                     borderStartEndRadius: '15px', 
+                                    color: "#fff"
                                 } 
                             },
                             rows: { 
