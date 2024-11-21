@@ -73,7 +73,10 @@ const Header = () => {
 
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            if (
+                dropdownRef.current && !dropdownRef.current.contains(event.target) &&
+                categoryDropdownRef.current && !categoryDropdownRef.current.contains(event.target)
+            ) {
                 setIsDropdownOpen(false);
                 setIsCategoryDropdownOpen(false);
             }
@@ -106,12 +109,14 @@ const Header = () => {
 
     const handleCategoryClick = () => {
         setIsCategoryDropdownOpen(!isCategoryDropdownOpen);
+        setIsDropdownOpen(false); // Đóng dropdown người dùng
     };
 
     const handleSelectProduct = (product) => {
-        navigate(`/category/${product.categoryId}/product/${product.id}`); // Điều hướng đến trang sản phẩm
-        setSearchText(''); // Reset ô tìm kiếm
-        setSearchResults([]); // Xóa kết quả tìm kiếm
+        navigate(`/category/${product.categoryId}/product/${product.id}`);
+        setSearchText('');
+        setSearchResults([]);
+        setIsDropdownOpen(false); // Đóng dropdown kết quả tìm kiếm
     };
 
     return (
@@ -129,7 +134,7 @@ const Header = () => {
                     </button>
 
                     <div className={`${isMobileMenuOpen ? 'flex' : 'hidden'} lg:flex flex-col lg:flex-row w-full lg:w-auto mt-4 lg:mt-0 gap-4 lg:items-center`}>
-                        <div className="relative w-full">
+                        <div className="relative w-full" ref={categoryDropdownRef}>
                             <button className="flex items-center gap-2 hover:bg-[#2871d5] rounded-[32px] py-3 px-4 whitespace-nowrap" onClick={handleCategoryClick}>
                                 <FontAwesomeIcon icon={faBars} />
                                 <span>Danh mục</span>
@@ -138,9 +143,17 @@ const Header = () => {
                                 <div className="absolute top-full left-0 right-0 bg-white text-black shadow-lg rounded-lg z-50 w-full">
                                     <div className="py-2">
                                         {categories.map((category) => (
-                                            <Link to={`/category/${category.id}`} key={category.id} className="block px-4 py-2 hover:bg-gray-200">
+                                            <div 
+                                                key={category.id} 
+                                                onClick={() => {
+                                                    console.log(`Navigating to /category/${category.id}`);
+                                                    navigate(`/category/${category.id}`);
+                                                    setIsCategoryDropdownOpen(false); // Đóng dropdown khi chọn danh mục
+                                                }}
+                                                className="block px-4 py-2 hover:bg-gray-200 cursor-pointer"
+                                            >
                                                 {category.name}
-                                            </Link>
+                                            </div>
                                         ))}
                                     </div>
                                 </div>
@@ -157,7 +170,7 @@ const Header = () => {
                                 value={searchText}
                                 onChange={handleSearchChange}
                                 className="w-full lg:w-72 border rounded-[32px] py-3 px-10 focus:outline-none text-xs text-black"
-                                onFocus={() => setIsCategoryDropdownOpen(false)} // Đóng dropdown danh mục khi tìm kiếm
+                                onFocus={() => setIsCategoryDropdownOpen(false)}
                             />
                             {searchResults.length > 0 && (
                                 <div className="absolute z-10 bg-white shadow-lg rounded-lg mt-1 w-full max-h-96 overflow-y-auto text-black">
@@ -165,7 +178,7 @@ const Header = () => {
                                         <div 
                                             key={result.id} 
                                             className="block px-4 py-2 hover:bg-gray-200 cursor-pointer"
-                                            onClick={() => handleSelectProduct(result)} // Gọi hàm chọn sản phẩm
+                                            onClick={() => handleSelectProduct(result)}
                                         >
                                             <div className="grid grid-cols-5 gap-2">
                                                 <div className="col-span-1">
