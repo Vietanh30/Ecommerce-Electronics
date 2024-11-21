@@ -1,21 +1,35 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faLocationDot, faSearch, faShoppingCart, faUser, faXmark, faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import {
+    faBars,
+    faLocationDot,
+    faSearch,
+    faShoppingCart,
+    faUser,
+    faXmark,
+    faCaretDown,
+} from '@fortawesome/free-solid-svg-icons';
 import { clearLS, getProfileFromLS } from '../../utils/auth';
 import path from '../../constants/path';
 import { useSelector, useDispatch } from 'react-redux';
 import { userAPI } from '../../api/userApi';
+import { formatPrice } from '../../utils/utils';
 
 const Header = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userName, setUserName] = useState('');
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const cartItemCount = useSelector(state => state.cartItemCount);
+    const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
+    const [categories, setCategories] = useState([]);
+    const [searchText, setSearchText] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
+    const cartItemCount = useSelector((state) => state.cartItemCount);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const dropdownRef = useRef(null); // Ref for the dropdown menu
+    const dropdownRef = useRef(null);
+    const categoryDropdownRef = useRef(null);
 
     useEffect(() => {
         const user = getProfileFromLS();
@@ -38,6 +52,17 @@ const Header = () => {
         if (isLoggedIn) {
             fetchCart();
         }
+
+        const fetchCategories = async () => {
+            try {
+                const response = await userAPI.category.getAll();
+                setCategories(response.data);
+            } catch (error) {
+                console.error('Lỗi khi lấy danh mục:', error);
+            }
+        };
+
+        fetchCategories();
     }, [dispatch, isLoggedIn]);
 
     const handleLogout = () => {
@@ -46,11 +71,11 @@ const Header = () => {
         navigate(path.login);
     };
 
-    // Close dropdown when clicking outside
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
                 setIsDropdownOpen(false);
+                setIsCategoryDropdownOpen(false);
             }
         };
 
@@ -60,12 +85,41 @@ const Header = () => {
         };
     }, []);
 
+    const handleSearchChange = async (e) => {
+        const value = e.target.value;
+        setSearchText(value);
+
+        if (value) {
+            try {
+                const response = await userAPI.product.getAll();
+                const results = response.data.filter((product) =>
+                    product.name.toLowerCase().includes(value.toLowerCase())
+                );
+                setSearchResults(results);
+            } catch (error) {
+                console.error('Lỗi khi tìm kiếm sản phẩm:', error);
+            }
+        } else {
+            setSearchResults([]);
+        }
+    };
+
+    const handleCategoryClick = () => {
+        setIsCategoryDropdownOpen(!isCategoryDropdownOpen);
+    };
+
+    const handleSelectProduct = (product) => {
+        navigate(`/category/${product.categoryId}/product/${product.id}`); // Điều hướng đến trang sản phẩm
+        setSearchText(''); // Reset ô tìm kiếm
+        setSearchResults([]); // Xóa kết quả tìm kiếm
+    };
+
     return (
         <header className="bg-[#2a83e9] text-sm sticky top-0 z-50">
             <div className="container mx-auto px-4 lg:px-20">
                 <div className="flex flex-wrap items-center justify-between py-3 text-white">
                     <div className="flex items-center">
-                        <Link to="/" className="text-lg md:text-xl font-bold text-[#fef201] whitespace-nowrap">
+                        <Link to={path.home} className="text-lg md:text-xl font-bold text-[#fef201] whitespace-nowrap">
                             ECOMMERCE NHÓM 10
                         </Link>
                     </div>
@@ -75,20 +129,59 @@ const Header = () => {
                     </button>
 
                     <div className={`${isMobileMenuOpen ? 'flex' : 'hidden'} lg:flex flex-col lg:flex-row w-full lg:w-auto mt-4 lg:mt-0 gap-4 lg:items-center`}>
-                        <div className="hidden lg:flex items-center gap-2 whitespace-nowrap">
-                            <FontAwesomeIcon icon={faBars} />
-                            <span>Danh mục</span>
+                        <div className="relative w-full">
+                            <button className="flex items-center gap-2 hover:bg-[#2871d5] rounded-[32px] py-3 px-4 whitespace-nowrap" onClick={handleCategoryClick}>
+                                <FontAwesomeIcon icon={faBars} />
+                                <span>Danh mục</span>
+                            </button>
+                            {isCategoryDropdownOpen && (
+                                <div className="absolute top-full left-0 right-0 bg-white text-black shadow-lg rounded-lg z-50 w-full">
+                                    <div className="py-2">
+                                        {categories.map((category) => (
+                                            <Link to={`/category/${category.id}`} key={category.id} className="block px-4 py-2 hover:bg-gray-200">
+                                                {category.name}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
                         </div>
 
                         <div className="relative w-full lg:w-72">
-                            <button className="absolute left-3 top-1/2 -translate-y-1/2">
+                            <button className="absolute left-3 top-1/2 transform -translate-y-1/2">
                                 <FontAwesomeIcon icon={faSearch} className="text-gray-500" />
                             </button>
                             <input
                                 type="text"
                                 placeholder="Bạn tìm gì..."
+                                value={searchText}
+                                onChange={handleSearchChange}
                                 className="w-full lg:w-72 border rounded-[32px] py-3 px-10 focus:outline-none text-xs text-black"
+                                onFocus={() => setIsCategoryDropdownOpen(false)} // Đóng dropdown danh mục khi tìm kiếm
                             />
+                            {searchResults.length > 0 && (
+                                <div className="absolute z-10 bg-white shadow-lg rounded-lg mt-1 w-full max-h-96 overflow-y-auto text-black">
+                                    {searchResults.map(result => (
+                                        <div 
+                                            key={result.id} 
+                                            className="block px-4 py-2 hover:bg-gray-200 cursor-pointer"
+                                            onClick={() => handleSelectProduct(result)} // Gọi hàm chọn sản phẩm
+                                        >
+                                            <div className="grid grid-cols-5 gap-2">
+                                                <div className="col-span-1">
+                                                    <img className='w-full h-15' src={result.images[0].url} alt="" />
+                                                </div>
+                                                <div className="col-span-3">
+                                                    <div className='text-[10px] line-clamp-2'>{result.name}</div>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <div className="text-[#dd2f2c] text-[10px] font-semibold w-max">{formatPrice(result.discountPrice)}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
                         </div>
 
                         <div className="flex flex-col lg:flex-row gap-2 relative" ref={dropdownRef}>
@@ -124,7 +217,6 @@ const Header = () => {
                                     </span>
                                 )}
                             </Link>
-
                             <button className="flex items-center gap-2 bg-[#5194e8] rounded-[32px] hover:bg-[#2871d5] py-3 px-4 whitespace-nowrap min-w-44 max-w-44">
                                 <FontAwesomeIcon icon={faLocationDot} className="text-lg" />
                                 <span className='line-clamp-1'>Hà Nội</span>

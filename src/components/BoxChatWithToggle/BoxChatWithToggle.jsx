@@ -15,7 +15,7 @@ const BoxChatWithToggle = () => {
     { question: "Phí vận chuyển là bao nhiêu?", answer: "Phí vận chuyển sẽ được tính dựa trên địa chỉ giao hàng của bạn." },
     { question: "Sản phẩm này còn hàng không?", answer: "Sản phẩm hiện còn hàng tại kho." },
     { question: "Tôi có thể trả lại hàng không?", answer: "Bạn có thể trả lại hàng trong vòng 7 ngày kể từ khi nhận hàng." },
-    { question: "Test question?", answer: "Test Answer." },
+    { question: "Tôi muốn mua 1 lap top", answer: "Bạn muốn mua sản phẩm như nào? Vui lòng cho tôi biết thêm để tư vấn" },
   ];
 
   // Hàm xử lý gửi tin nhắn
