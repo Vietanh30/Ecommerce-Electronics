@@ -5,6 +5,8 @@ const BASE_PRODUCT_URL = "/products";
 const BASE_ORDER_URL = "/orders";
 const BASE_CATEGORY_URL = "/categories";
 const BASE_FLASHSALE_URL = "/flashSales";
+const BASE_HIGH_QUALITY_URL = "/highQuality";
+const BASE_SAMSUNG_URL = "/samsung";
 const BASE_CART_URL = "/carts";
 
 export const userAPI = {
@@ -171,5 +173,11 @@ export const userAPI = {
 
   flashSale: {
     getAll: () => http.get(BASE_FLASHSALE_URL),
+  },
+  highQuality: {
+    getAll: () => http.get(BASE_HIGH_QUALITY_URL),
+  },
+  samsung: {
+    getAll: () => http.get(BASE_SAMSUNG_URL),
   },
 };

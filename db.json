@@ -2204,27 +2204,111 @@
     "flashSales": [
         {
             "id": "1",
-            "productId": "cb12"
-        },
-        {
-            "id": "2",
             "productId": "b1f0"
         },
         {
-            "id": "3",
-            "productId": "dbde"
-        },
-        {
-            "id": "4",
-            "productId": "ce70"
-        },
-        {
-            "id": "5",
+            "id": "2",
             "productId": "48ab"
         },
         {
-            "id": "6",
+            "id": "3",
             "productId": "9fb5"
+        },
+        {
+            "id": "4",
+            "productId": "a611"
+        },
+        {
+            "id": "5",
+            "productId": "dbde"
+        },
+        {
+            "id": "6",
+            "productId": "cb12"
+        },
+        {
+            "id": "7",
+            "productId": "ce70"
+        },
+        {
+            "id": "8",
+            "productId": "e6c0"
+        },
+        {
+            "id": "9",
+            "productId": "0804"
+        },
+        {
+            "id": "10",
+            "productId": "729a"
+        }
+    ],
+    "highQuality": [
+        {
+            "id": "1",
+            "productId": "dbde"
+        },
+        {
+            "id": "2",
+            "productId": "9fb5"
+        },
+        {
+            "id": "3",
+            "productId": "b1f0"
+        },
+        {
+            "id": "4",
+            "productId": "0804"
+        },
+        {
+            "id": "5",
+            "productId": "729a"
+        },
+        {
+            "id": "6",
+            "productId": "a611"
+        },
+        {
+            "id": "7",
+            "productId": "cb12"
+        },
+        {
+            "id": "8",
+            "productId": "ce70"
+        },
+        {
+            "id": "9",
+            "productId": "48ab"
+        },
+        {
+            "id": "10",
+            "productId": "e6c0"
+        }
+    ],
+    "samsung": [
+        {
+            "id": "1",
+            "productId": "00c0"
+        },
+        {
+            "id": "2",
+            "productId": "e6c0"
+        },
+        {
+            "id": "3",
+            "productId": "729a"
+        },
+        {
+            "id": "4",
+            "productId": "b1f0"
+        },
+        {
+            "id": "5",
+            "productId": "cb12"
+        },
+        {
+            "id": "6",
+            "productId": "48ab"
         },
         {
             "id": "7",
@@ -2236,11 +2320,11 @@
         },
         {
             "id": "9",
-            "productId": "e6c0"
+            "productId": "9fb5"
         },
         {
             "id": "10",
-            "productId": "729a"
+            "productId": "dbde"
         }
     ],
     "orders": [

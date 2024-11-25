@@ -3,15 +3,16 @@ import imgFlashSales from '../../../../assets/Home/flashSales.png';
 import CardProduct from '../../../../components/CardProduct/CardProduct';
 import { userAPI } from '../../../../api/userApi';
 
-function FlashSales() {
+function FlashSales({categoryFlashSale}) {
     const [flashSales, setFlashSales] = useState([]);
     const [products, setProducts] = useState([]);
     const [timeLeft, setTimeLeft] = useState(24 * 60 * 60); // 24 hours in seconds
-
+    
     useEffect(() => {
+        console.log(categoryFlashSale)
         const fetchFlashSales = async () => {
             try {
-                const flashSalesResponse = await userAPI.flashSale.getAll();
+                const flashSalesResponse = await userAPI[categoryFlashSale].getAll();
                 setFlashSales(flashSalesResponse.data);
 
                 const productPromises = flashSalesResponse.data.map(flashSale =>
@@ -26,7 +27,7 @@ function FlashSales() {
         };
 
         fetchFlashSales();
-    }, []);
+    }, [categoryFlashSale]);
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -50,14 +51,6 @@ function FlashSales() {
     };
 
     return (
-        <div className="container mx-auto px-4 lg:px-20">
-            <div className="text-2xl font-semibold mt-5">Khuyến mãi Online</div>
-            <div className="mt-5 pb-5">
-                <div className="bg-white rounded-t-xl flex border-b-2 justify-center">
-                    <div className="bg-[#f1f8fe] border-b-2 border-[#2A83E9] flex justify-center w-full">
-                        <img className='w-36 px-6 py-3 h-auto' src={imgFlashSales} alt="" />
-                    </div>
-                </div>
                 <div className='bg-white p-4 rounded-b-xl'>
                     <div className='flex justify-center'>
                         <div className='bg-[#64B2FA] text-white rounded-[32px] px-28 py-[10px] flex items-center'>
@@ -77,8 +70,6 @@ function FlashSales() {
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
     );
 }
 
