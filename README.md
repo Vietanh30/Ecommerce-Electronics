@@ -1,8 +1,54 @@
-# React + Vite
+Ecommerce Electronics
+Một ứng dụng thương mại điện tử đơn giản được xây dựng bằng React và Vite, mang đến trải nghiệm mua sắm trực tuyến cho các sản phẩm điện tử.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🚀 Giới thiệu
+Dự án này cung cấp một mẫu ứng dụng thương mại điện tử với các tính năng cơ bản như duyệt sản phẩm, thêm vào giỏ hàng và thanh toán. Ứng dụng được tối ưu hóa để phát triển nhanh chóng và hiệu quả nhờ Vite.
 
-Currently, two official plugins are available:
+🛠️ Công nghệ sử dụng
+React: Thư viện JavaScript mạnh mẽ để xây dựng giao diện người dùng.
+Vite: Công cụ build và dev server hiện đại với tốc độ vượt trội.
+Tailwind CSS: Framework CSS tiện ích cho thiết kế giao diện đơn giản và đẹp mắt.
+ESLint: Công cụ kiểm tra mã để duy trì mã nguồn nhất quán và sạch sẽ.
+📦 Cài đặt
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Clone repository:
+   bash
+   Copy code
+   git clone https://github.com/Vietanh30/Ecommerce-Electronics.git
+2. Chuyển đến thư mục dự án:
+   bash
+   Copy code
+   cd Ecommerce-Electronics
+3. Cài đặt các phụ thuộc:
+   bash
+   Copy code
+   npm install
+4. Chạy ứng dụng:
+   bash
+   Copy code
+   npm run dev
+   📂 Cấu trúc thư mục
+   plaintext
+   Copy code
+   Ecommerce-Electronics/
+   ├── public/ # Chứa các tài nguyên tĩnh
+   ├── src/ # Chứa mã nguồn của ứng dụng
+   ├── .env # Các biến môi trường
+   └── db.json # Dữ liệu giả lập cho ứng dụng
+   🌟 Tính năng chính
+   Duyệt sản phẩm: Người dùng có thể xem danh sách các sản phẩm điện tử.
+   Thêm vào giỏ hàng: Thêm sản phẩm yêu thích vào giỏ hàng.
+   Thanh toán: Thực hiện quy trình thanh toán và quản lý đơn hàng.
+   🤝 Đóng góp
+   Chúng tôi hoan nghênh mọi đóng góp từ cộng đồng. Hãy:
+
+Fork repository.
+Tạo nhánh mới: git checkout -b feature/your-feature-name
+Commit thay đổi: git commit -m 'Add some feature'
+Push lên nhánh: git push origin feature/your-feature-name
+Tạo Pull Request.
+📜 Giấy phép
+Dự án này được cấp phép theo MIT License. Xem LICENSE để biết thêm chi tiết.
+
+📞 Liên hệ
+Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ qua GitHub: Vietanh30.
