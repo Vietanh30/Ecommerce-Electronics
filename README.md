@@ -12,24 +12,14 @@ ESLint: Công cụ kiểm tra mã để duy trì mã nguồn nhất quán và s�
 📦 Cài đặt
 Clone repository:
 
-bash
-Copy code
-`git clone https://github.com/Vietanh30/Ecommerce-Electronics.git`
-Chuyển đến thư mục dự án:
+```bash
+git clone https://github.com/Vietanh30/Ecommerce-Electronics.git
+cd Ecommerce-Electronics
+npm install
+npm run dev
+npm run server
+```
 
-bash
-Copy code
-`cd Ecommerce-Electronics`
-Cài đặt các phụ thuộc:
-
-bash
-Copy code
-`npm install`
-Chạy ứng dụng:
-
-bash
-Copy code
-`npm run dev`
 📂 Cấu trúc thư mục
 plaintext
 Ecommerce-Electronics/
@@ -48,9 +38,8 @@ Fork repository.
 
 Tạo nhánh mới:
 
-bash
-Copy code
-`git checkout -b feature/your-feature-name`
+git checkout -b feature/your-feature-name
+
 Commit thay đổi:
 
 bash
